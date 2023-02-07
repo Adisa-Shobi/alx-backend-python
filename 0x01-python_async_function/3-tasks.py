@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-
+'''
+Defines function that returns asyncio.Task from a coroutine
+'''
 import asyncio
+wait_random = __import__('0-basic_async_syntax').wait_random
 
-task_wait_random = __import__('3-tasks').task_wait_random
 
-
-async def test(max_delay: int) -> float:
-    task = task_wait_random(max_delay)
-    await task
-    print(task.__class__)
-
-asyncio.run(test(5))
+def task_wait_random(max_delay):
+    '''
+    returns wait_random task
+    '''
+    return asyncio.create_task(wait_random(max_delay))
