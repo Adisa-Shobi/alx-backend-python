@@ -2,12 +2,12 @@
 '''
 Defines a coroutine called async_generator
 '''
-from typing import Iterator
+from typing import Generator
 import random
 import asyncio
 
 
-async def async_generator() -> Iterator[int]:
+async def async_generator() -> Generator[float, None, None]:
     '''
     Generator function loops to 10
     '''
