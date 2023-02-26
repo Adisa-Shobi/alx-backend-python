@@ -23,7 +23,7 @@ class TestGithubOrgClient(unittest.TestCase):
         test that GithubOrgClient.org returns the correct value.
         '''
         client_test = GithubOrgClient(org)
-        resp = client_test.org
+        client_test.org()
         mock_get.assert_called_once_with(
             "https://api.github.com/orgs/{org}".format(org=org)
         )
