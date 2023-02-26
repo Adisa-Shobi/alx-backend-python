@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import unittest
 from unittest.mock import Mock
 from parameterized import parameterized
@@ -17,7 +18,7 @@ class TestGithubOrgClient(unittest.TestCase):
         ("abc")
     ])
     @unittest.mock.patch('client.get_json')
-    def test_org(self, org, mock_get):
+    def test_org(self, org: str, mock_get):
         '''
         test that GithubOrgClient.org returns the correct value.
         '''
