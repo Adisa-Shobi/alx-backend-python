@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
+'''
+Testing client file methods
+'''
 import unittest
 from unittest.mock import Mock
 from parameterized import parameterized
 from client import GithubOrgClient
-'''
-Testing client file methods
-'''
 
 
 class TestGithubOrgClient(unittest.TestCase):
