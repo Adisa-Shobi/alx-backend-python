@@ -7,6 +7,7 @@ from unittest.mock import Mock
 from parameterized import parameterized
 from typing import Mapping, Sequence, Union, Any
 from utils import access_nested_map, get_json, memoize
+from client import GithubOrgClient
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -88,3 +89,4 @@ class TestMemoize(unittest.TestCase):
             test.a_property()
             test.a_property()
             mock_mthd.assert_called_once()
+
