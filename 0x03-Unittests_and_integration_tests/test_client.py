@@ -7,7 +7,7 @@ from fixtures import TEST_PAYLOAD
 from parameterized import parameterized, parameterized_class
 from typing import Mapping, List
 import unittest
-from unittest.mock import Mock, PropertyMock
+from unittest.mock import Mock, PropertyMock, patch
 
 
 class TestGithubOrgClient(unittest.TestCase):
@@ -19,7 +19,7 @@ class TestGithubOrgClient(unittest.TestCase):
         ("google"),
         ("abc")
     ])
-    @unittest.mock.patch('client.get_json')
+    @patch('client.get_json')
     def test_org(self, org: str, mock_get):
         '''
         test that GithubOrgClient.org returns the correct value.
@@ -30,7 +30,7 @@ class TestGithubOrgClient(unittest.TestCase):
             "https://api.github.com/orgs/{org}".format(org=org)
         )
 
-    @unittest.mock.patch(
+    @patch(
         'client.GithubOrgClient.org',
         new_callable=PropertyMock)
     def test_public_repos_url(self, mock_org) -> None:
@@ -48,7 +48,7 @@ class TestGithubOrgClient(unittest.TestCase):
         ([{"name": "axios"}, {"name": "healthtrace"}, {"name": "adisa"}],
          "https://api.github.com/orgs/test")
     ])
-    @unittest.mock.patch('client.get_json')
+    @patch('client.get_json')
     def test_public_repos(self,
                           mock_payload: List,
                           mock_url: str, mock_get) -> None:
@@ -57,7 +57,7 @@ class TestGithubOrgClient(unittest.TestCase):
         '''
         mock_get.return_value = mock_payload
 
-        with unittest.mock.patch(
+        with patch(
                 'client.GithubOrgClient._public_repos_url',
                 new_callable=PropertyMock) as mock_repo_url:
 
@@ -99,7 +99,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         '''
         Sets up class for integration testing
         '''
-        cls.get_patcher = unittest.mock.patch('requests.get',
+        cls.get_patcher = patch('requests.get',
                                               side_effect=cls.side_effect,
                                               return_value=None)
         cls.mock = cls.get_patcher.start()
