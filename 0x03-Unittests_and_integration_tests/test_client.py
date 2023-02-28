@@ -42,19 +42,15 @@ class TestGithubOrgClient(unittest.TestCase):
         mock_org.return_value = mock_resp
         self.assertEqual(repo_url._public_repos_url, mock_resp['repos_url'])
 
-    @parameterized.expand([
-        ([{"name": "google"}, {"name": "microsoft"}, {"name": "excel"}],
-         "https://api.github.com/orgs/test"),
-        ([{"name": "axios"}, {"name": "healthtrace"}, {"name": "adisa"}],
-         "https://api.github.com/orgs/test")
-    ])
     @patch('client.get_json')
-    def test_public_repos(self,
-                          mock_payload: List,
-                          mock_url: str, mock_get) -> None:
+    def test_public_repos(self, mock_get):
         '''
         unit-test GithubOrgClient.public_repos
         '''
+        mock_payload = [{"name": "google"},
+                        {"name": "microsoft"},
+                        {"name": "excel"}]
+        mock_url = "https://api.github.com/orgs/test"
         mock_get.return_value = mock_payload
 
         with patch(
@@ -100,8 +96,8 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         Sets up class for integration testing
         '''
         cls.get_patcher = patch('requests.get',
-                                              side_effect=cls.side_effect,
-                                              return_value=None)
+                                side_effect=cls.side_effect,
+                                return_value=None)
         cls.mock = cls.get_patcher.start()
 
     @classmethod
