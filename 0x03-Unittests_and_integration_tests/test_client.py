@@ -3,6 +3,7 @@
 Testing client file methods defined in the GithubOrgClient class
 '''
 from client import GithubOrgClient, get_json
+import utils
 from fixtures import TEST_PAYLOAD
 from parameterized import parameterized, parameterized_class
 from typing import Mapping, List
