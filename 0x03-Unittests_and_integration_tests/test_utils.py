@@ -89,4 +89,3 @@ class TestMemoize(unittest.TestCase):
             test.a_property()
             test.a_property()
             mock_mthd.assert_called_once()
-
